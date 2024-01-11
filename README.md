@@ -1,9 +1,8 @@
-# Projeto-X
-<h1 align="center"> DevLinks </h1>
+# login
 
-<p align="center">
-Programa gratuito, promovido pela Wilson sons WEB. <br/>
-<a href=https://www.linkedin.com/company/offshoresupportbases.>Conheca nossa plataforma do linkedin</a>
+
+<br/>
+<a href=https://www.linkedin.com/company/offshoresupportbases.>Conheca minha plataforma do linkedin</a>
 </p>
 
 <p align="center">
@@ -20,7 +19,7 @@ Programa gratuito, promovido pela Wilson sons WEB. <br/>
 <br>
 
 <p align="center">
-  <img alt="projeto DevLinks" src=".github/previw.png.jpg" width="100%">
+  <img alt="projeto DevLinks" src="readme.png" width="100%">
 </p>
 
 ## 🚀 Tecnologias
@@ -30,19 +29,15 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - HTML e CSS
 - JavaScript
 - Git e Github
-- Figma
 
 ## 💻 Projeto
 
-O DevLinks é um agregador de links para usar como cartão de visitas online.
+A tela inicial de login online.
 
 - [Acesse o projeto finalizado, online](https://github.com/AnaCAROLINA39/Projeto-X)
 
-- [Assistir aulas](https://www.youtube.com/user/WilsonSonsir)
 
-## 🔖 Layout
 
-Você pode visualizar o layout do projeto através [DESSE LINK](https://www.figma.com/community/file/1187422022288947321). É necessário ter conta no [Figma](https://figma.com) para acessá-lo.
 
 ## :memo: Licença
 
@@ -50,4 +45,4 @@ Esse projeto está sob a licença MIT.
 <a href="https://storyset.com/transport">Transport illustrations by Storyset</a>
 ---
 
-Feito com ♥ Wilson Sons :wave: [Participe da nossa comunidade!](https://www.linkedin.com/company/offshoresupportbases)
+Feito com ♥ por Ana Carolina 
