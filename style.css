@@ -3,6 +3,9 @@ body {
     margin: 0;
     font-family: 'PT Serif', serif;
 }
+body *{
+    box-sizing: border-box;
+}
 .main-login {
     width: 100vw;
     height: 100vh;
@@ -89,4 +92,34 @@ body {
     background:#407BFF ;
     cursor: pointer;
     box-shadow: 0px 10px 40px -12px #0095ff52;
+}
+@media only screen and (max-width: 950px){
+    .card-login{
+        width: 85%;
+    }  
+}
+@media only screen and (max-width:600px){
+    .main-login{
+        flex-direction: column;
+    }
+    .left-login h1{
+        display: none;/*OCULTA COISA DO HTML*/
+        flex-flow: column-reverse;
+    }
+    .left-login{
+        width: 100%;
+        height: auto;
+    }
+    .right-login{
+        width: 100%;
+        height: auto;
+    }
+    .left-imagem{
+        width: 100vw;
+    }
+    .card-login{
+        margin-bottom: 80px;
+    }
+   
+
 }
