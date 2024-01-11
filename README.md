@@ -47,7 +47,7 @@ Você pode visualizar o layout do projeto através [DESSE LINK](https://www.figm
 ## :memo: Licença
 
 Esse projeto está sob a licença MIT.
-
+<a href="https://storyset.com/transport">Transport illustrations by Storyset</a>
 ---
 
 Feito com ♥ Wilson Sons :wave: [Participe da nossa comunidade!](https://www.linkedin.com/company/offshoresupportbases)
