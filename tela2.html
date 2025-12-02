@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Empresa de Embarcações</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f5f7fa;
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        /* Seletor de tema */
+        .theme-selector {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .theme-buttons {
+            display: flex;
+            gap: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .theme-btn.active {
+            border: 3px solid #333;
+            transform: scale(1.05);
+        }
+
+        /* Tema 1: Design Náutico Clássico */
+        .theme-1 {
+            background: linear-gradient(45deg, #0A2463, #5B8DC9);
+        }
+
+        /* Tema 2: Design Moderno Corporativo */
+        .theme-2 {
+            background: linear-gradient(45deg, #1E2A38, #0066CC);
+        }
+
+        /* Tema 3: Design Minimalista Premium */
+        .theme-3 {
+            background: linear-gradient(45deg, #2c3e50, #34495e);
+        }
+
+        /* Layout do login */
+        .login-wrapper {
+            display: flex;
+            height: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Coluna esquerda - Formulário */
+        .login-form-container {
+            flex: 1;
+            background-color: white;
+            padding: 10px 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Coluna direita - Banner */
+        .login-banner {
+            flex: 1;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            color: white;
+            text-align: center;
+        }
+
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 2;
+            max-width: 500px;
+        }
+
+        /* Cabeçalho do formulário */
+        .logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            font-size: 32px;
+            margin-right: 15px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .login-header {
+            margin-bottom: 40px;
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            color: #777;
+            font-size: 15px;
+        }
+
+        /* Formulário */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+            font-size: 18px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px 15px 15px 50px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: #f9f9f9;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #5B8DC9;
+            box-shadow: 0 0 0 3px rgba(91, 141, 201, 0.2);
+            background-color: white;
+        }
+
+        /* Checkbox */
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-container input {
+            margin-right: 8px;
+        }
+
+        .forgot-link {
+            color: #5B8DC9;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .forgot-link:hover {
+            color: #0A2463;
+            text-decoration: underline;
+        }
+
+        /* Botão */
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background-color: #0A2463;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 25px;
+        }
+
+        .btn-login:hover {
+            background-color: #5B8DC9;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        /* Links adicionais */
+        .additional-links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .additional-links a {
+            color: #5B8DC9;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .additional-links a:hover {
+            color: #0A2463;
+            text-decoration: underline;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: #999;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background-color: #eee;
+        }
+
+        .divider span {
+            padding: 0 15px;
+            font-size: 14px;
+        }
+
+        /* Social login */
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+            color: #555;
+            font-size: 20px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Rodapé */
+        .login-footer {
+            margin-top: 30px;
+            text-align: center;
+            color: #888;
+            font-size: 13px;
+        }
+
+        /* Efeitos específicos por tema */
+        .theme-1-active .logo-text {
+            color: #0A2463;
+        }
+
+        .theme-1-active .btn-login {
+            background-color: #0A2463;
+        }
+
+        .theme-1-active .btn-login:hover {
+            background-color: #5B8DC9;
+        }
+
+        .theme-1-active .forgot-link,
+        .theme-1-active .additional-links a {
+            color: #0A2463;
+        }
+
+        .theme-1-active .login-banner {
+            background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+        }
+
+        .theme-2-active .logo-text {
+            color: #1E2A38;
+        }
+
+        .theme-2-active .btn-login {
+            background-color: #0066CC;
+        }
+
+        .theme-2-active .btn-login:hover {
+            background-color: #0052a3;
+        }
+
+        .theme-2-active .forgot-link,
+        .theme-2-active .additional-links a {
+            color: #0066CC;
+        }
+
+        .theme-2-active .login-banner {
+            background-image: url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+        }
+
+        .theme-3-active .logo-text {
+            color: #2c3e50;
+        }
+
+        .theme-3-active .btn-login {
+            background-color: #2c3e50;
+        }
+
+        .theme-3-active .btn-login:hover {
+            background-color: #34495e;
+        }
+
+        .theme-3-active .forgot-link,
+        .theme-3-active .additional-links a {
+            color: #2c3e50;
+        }
+
+        .theme-3-active .login-banner {
+            background-image: url('https://cdn.wilsonsons.com.br/wp-content/uploads/2023/10/DJI_0155-HDR.teconsalvadorblog-1-scaled.jpg');
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .login-wrapper {
+                flex-direction: column;
+                height: auto;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .login-banner {
+                min-height: 250px;
+                order: -1;
+            }
+
+            .login-form-container {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .login-form-container {
+                padding: 30px 20px;
+            }
+
+            .login-header h1 {
+                font-size: 24px;
+            }
+
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .additional-links {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .theme-selector {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+                display: flex;
+                justify-content: center;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-form-container, .banner-content {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        /* Modal de recuperação de senha */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<body class="theme-1-active">
+    <div class="container">
+        <!-- Seletor de tema -->
+        <div class="theme-selector">
+            <div class="theme-buttons">
+                <button class="theme-btn theme-1 active" data-theme="1" title="Tema Náutico Clássico"></button>
+                <button class="theme-btn theme-2" data-theme="2" title="Tema Moderno Corporativo"></button>
+                <button class="theme-btn theme-3" data-theme="3" title="Tema Minimalista Premium"></button>
+            </div>
+        </div>
+
+        <!-- Wrapper de login -->
+        <div class="login-wrapper">
+            <!-- Coluna do formulário -->
+            <div class="login-form-container">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-anchor"></i>
+                    </div>
+                    <div class="logo-text">NAVIGARE</div>
+                </div>
+
+                <div class="login-header">
+                    <h1>Acesso ao Sistema</h1>
+                    <p>Bem-vindo de volta! Por favor, faça login para acessar sua conta.</p>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username">Usuário ou E-mail</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="username" class="form-control" placeholder="Digite seu usuário ou e-mail" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="password" class="form-control" placeholder="Digite sua senha" required>
+                        </div>
+                    </div>
+
+                    <div class="remember-forgot">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Lembrar-me</label>
+                        </div>
+                        <a href="#" class="forgot-link" id="forgotPassword">Esqueci minha senha</a>
+                    </div>
+
+                    <button type="submit" class="btn-login">
+                        <i class="fas fa-sign-in-alt"></i> Acessar Sistema
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>Ou acesse com</span>
+                </div>
+
+                <div class="social-login">
+                    <div class="social-btn">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <div class="social-btn">
+                        <i class="fab fa-google"></i>
+                    </div>
+                    <div class="social-btn">
+                        <i class="fas fa-fingerprint"></i>
+                    </div>
+                </div>
+
+                <div class="additional-links">
+                    <a href="#" id="firstAccess">Primeiro acesso</a>
+                    <a href="#" id="support">Suporte técnico</a>
+                    <a href="#" id="privacy">Política de privacidade</a>
+                </div>
+
+                <div class="login-footer">
+                    <p>© 2023 Navigare Embarcações. Todos os direitos reservados.</p>
+                    <p>v2.1.4 | Sistema de gestão náutica</p>
+                </div>
+            </div>
+
+            <!-- Coluna do banner -->
+            <div class="login-banner">
+                <div class="banner-overlay"></div>
+                <div class="banner-content">
+                    <h2>Navigare Embarcações</h2>
+                    <p>Sistema de gestão corporativa para a indústria náutica. Controle de frota, manutenção, tripulação e operações logísticas.</p>
+                    <div style="margin-top: 30px; display: flex; justify-content: center; gap: 20px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 28px; font-weight: 700;">150+</div>
+                            <div style="font-size: 14px;">Embarcações</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 28px; font-weight: 700;">24/7</div>
+                            <div style="font-size: 14px;">Suporte</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 28px; font-weight: 700;">100%</div>
+                            <div style="font-size: 14px;">Seguro</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de recuperação de senha -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Recuperar Senha</h2>
+            <p>Digite seu e-mail cadastrado para receber as instruções de recuperação de senha.</p>
+            <form id="recoveryForm" style="margin-top: 20px;">
+                <div class="form-group">
+                    <label for="recoveryEmail">E-mail</label>
+                    <input type="email" id="recoveryEmail" class="form-control" placeholder="seu@email.com" required>
+                </div>
+                <button type="submit" class="btn-login" style="margin-top: 10px;">Enviar Instruções</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Controle dos temas
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeButtons = document.querySelectorAll('.theme-btn');
+            const body = document.body;
+            
+            themeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const theme = this.getAttribute('data-theme');
+                    
+                    // Remove todas as classes de tema ativo
+                    body.classList.remove('theme-1-active', 'theme-2-active', 'theme-3-active');
+                    
+                    // Adiciona a classe do tema selecionado
+                    body.classList.add(`theme-${theme}-active`);
+                    
+                    // Atualiza botões ativos
+                    themeButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Modal de recuperação de senha
+            const forgotPasswordLink = document.getElementById('forgotPassword');
+            const passwordModal = document.getElementById('passwordModal');
+            const closeModal = document.querySelector('.close-modal');
+            
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                passwordModal.style.display = 'flex';
+            });
+            
+            closeModal.addEventListener('click', function() {
+                passwordModal.style.display = 'none';
+            });
+            
+            window.addEventListener('click', function(e) {
+                if (e.target === passwordModal) {
+                    passwordModal.style.display = 'none';
+                }
+            });
+            
+            // Validação do formulário de login
+            const loginForm = document.getElementById('loginForm');
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                // Validação simples
+                if (username.trim() === '' || password.trim() === '') {
+                    alert('Por favor, preencha todos os campos.');
+                    return;
+                }
+                
+                // Simulação de login bem-sucedido
+                const loginBtn = loginForm.querySelector('.btn-login');
+                const originalText = loginBtn.innerHTML;
+                
+                loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Acessando...';
+                loginBtn.disabled = true;
+                
+                // Simulação de requisição
+                setTimeout(() => {
+                    alert('Login realizado com sucesso! Redirecionando...');
+                    loginBtn.innerHTML = originalText;
+                    loginBtn.disabled = false;
+                    
+                    // Aqui normalmente redirecionaria para a dashboard
+                    // window.location.href = 'dashboard.html';
+                }, 1500);
+            });
+            
+            // Validação do formulário de recuperação
+            const recoveryForm = document.getElementById('recoveryForm');
+            recoveryForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('recoveryEmail').value;
+                
+                if (!validateEmail(email)) {
+                    alert('Por favor, insira um e-mail válido.');
+                    return;
+                }
+                
+                alert(`Instruções de recuperação enviadas para: ${email}`);
+                passwordModal.style.display = 'none';
+                recoveryForm.reset();
+            });
+            
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            // Links adicionais
+            document.getElementById('firstAccess').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Entre em contato com o administrador do sistema para criar seu primeiro acesso.');
+            });
+            
+            document.getElementById('support').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Suporte técnico: suporte@navigare.com.br | (11) 99999-9999');
+            });
+            
+            document.getElementById('privacy').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert('Política de privacidade disponível em: https://navigare.com.br/privacidade');
+            });
+            
+            // Adicionar funcionalidade aos botões de login social
+            document.querySelectorAll('.social-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const icon = this.querySelector('i').className;
+                    let provider = '';
+                    
+                    if (icon.includes('microsoft')) provider = 'Microsoft';
+                    else if (icon.includes('google')) provider = 'Google';
+                    else if (icon.includes('fingerprint')) provider = 'Biometria';
+                    
+                    alert(`Login com ${provider} selecionado. Em uma implementação real, isso redirecionaria para a autenticação do provedor.`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
